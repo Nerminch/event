@@ -6,7 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
+  // You can find this in the Clerk Dashboard -> Webhook -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
@@ -54,20 +54,20 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
-
+//create user in mongodb
   if (eventType === "user.created") {
     const { email_addresses, image_url, first_name, last_name, username } = evt.data;
 
     // Ensure that firstName, lastName, username, and id are valid strings
     const user = {
-      clerkId: id || "",  // Default to an empty string if 'id' is undefined
+      clerkId: id ,  // Default to an empty string if 'id' is undefined
       email: email_addresses[0].email_address,
-      username: username || "",  // Default to an empty string if username is null or undefined
-      firstName: first_name || "",  // Default to an empty string if first_name is null or undefined
-      lastName: last_name || "",  // Default to an empty string if last_name is null or undefined
-      photo: image_url || "",  // Default to an empty string if image_url is null or undefined
+      username: username ,  // Default to an empty string if username is null or undefined
+      firstName: first_name ,  // Default to an empty string if first_name is null or undefined
+      lastName: last_name ,  // Default to an empty string if last_name is null or undefined
+      photo: image_url ,  // Default to an empty string if image_url is null or undefined
     };
-
+console.log(user)
     const newUser = await createUser(user);
 
     if (newUser) {
