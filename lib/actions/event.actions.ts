@@ -16,6 +16,7 @@ import {
   GetEventsByUserParams,
   GetRelatedEventsByCategoryParams,
 } from "@/types";
+import mongoose from "mongoose";
 
 const getCategoryByName = async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: "i" } });
@@ -36,13 +37,24 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
   try {
     await connectToDatabase();
 
-    const organizer = await User.findById(userId);
-    if (!organizer) throw new Error("Organizer not found");
+    let organizer = await User.findById(userId);
+    
+    if (!organizer) {
+      organizer= await User.create({
+        _id:userId.toString()
+      })
+    }
+    
+    if(!mongoose.Types.ObjectId.isValid(userId)){
+      console.log(userId);
+      
+      throw new Error("Invalid user id")
+    }
 
     const newEvent = await Event.create({
       ...event,
       category: event.categoryId,
-      organizer: userId,
+      organizer: userId
     });
     revalidatePath(path);
 

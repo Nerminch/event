@@ -2,18 +2,23 @@ import {
   generateUploadButton,
   generateUploadDropzone,
 } from "@uploadthing/react";
- 
-import type { OurFileRouter } from "../app/api/uploadthing/core.ts";
+import type { OurFileRouter } from "../app/api/uploadthing/core";
 
 export function useUploadThing(uploadType: string) {
-  // Supposons que ce soit une version simplifiée de la fonction
   return {
-    startUpload: (files: File[]) => {
-      // Implémentation de l'upload des fichiers
-      return new Promise((resolve, reject) => {
-        // Logique d'upload ici
-        resolve(files.map(file => ({ url: "image_url" }))); // Exemple de retour
-      });
+    startUpload: async (files: File[]) => {
+      try {
+        const response = await Promise.all(
+          files.map(async (file) => {
+            // Corrige ici avec des backticks pour la template string
+            return { url: `uploaded_url_for_${file.name}` };
+          })
+        );
+        return response;
+      } catch (error) {
+        console.error("Error uploading files:", error);
+        throw error;
+      }
     },
   };
 }
