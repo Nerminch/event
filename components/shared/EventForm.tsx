@@ -22,13 +22,14 @@ import { FileUploader } from "./FileUploader";
 import { useState } from "react";
 import Image from "next/image";
 import DatePicker from "react-datepicker";
-import { UploadButton } from "../lib/uploadthing";
+import { useUploadThing } from "@/lib/uploadthing";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox";
 import { useRouter } from "next/navigation";
 import { createEvent, updateEvent } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
+
 
 type EventFormProps = {
   userId: string;
@@ -49,7 +50,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       : eventDefaultValues;
   const router = useRouter();
 
-  const { startUpload } = useUploadThing("imageUploader");
+  const { startUpload } = useUploadThing("imageUploader");  // Vérifiez si ce hook est correctement utilisé
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
