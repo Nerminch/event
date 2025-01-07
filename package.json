@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.4",
     "@clerk/nextjs": "^6.9.6",
     "@hookform/resolvers": "^3.3.2",
+    "@nestjs/platform-express": "^10.4.15",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -19,12 +21,13 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@stripe/stripe-js": "^2.2.2",
-    "@uploadthing/react": "^6.0.2",
+    "@uploadthing/react": "^7.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.298.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
     "next": "^14.0.4",
     "query-string": "^8.1.0",
     "react": "^18.3.1",
@@ -36,7 +39,7 @@
     "svix": "^1.15.0",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^6.1.0",
+    "uploadthing": "^7.4.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {

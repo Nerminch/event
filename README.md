@@ -66,7 +66,7 @@ Assurez-vous que les éléments suivants sont installés sur votre machine :
 **Cloner le dépôt**
 
 ```bash
-git clone https://github.com/AndyDev77/evently.git
+git clone
 cd ton-projet
 ```
 
